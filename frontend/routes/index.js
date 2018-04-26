@@ -15,7 +15,7 @@ console.log('Subscribed bound to port 6080');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', {
-    title: 'Latency viewer'
+    title: 'Connections viewer'
   });
 });
 
