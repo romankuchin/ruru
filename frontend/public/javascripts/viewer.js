@@ -31,7 +31,6 @@ socket.on('randomdata', function(data){
   $('.sourcecity').text(data['source_city']);
   $('.destinationcountry').html(data['destination_country']+" <img width='25px' src='/images/flags/"+data['destination_countrycode'].toLowerCase()+"_64.png'/>");
   $('.destinationcity').text(data['destination_city']);
-  $('.latency').text(data['latency_total']+' MB');
 });
 
 function hello(){

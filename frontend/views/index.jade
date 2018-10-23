@@ -4,11 +4,6 @@ block content
   div#statsbar
     div.information Connections in the last 1 minute:
       div.connectionnumber -
-      div#scale Meaning of colors:
-        div#gradient
-        div#legend
-          div#left 1MB
-          div#right 500 MB
       div#animationbuttons
         button(class="btn btn-primary btn-xs", onclick="startAnimation()") Start Animation
         button(class="btn btn-primary btn-xs", onclick="stopAnimation()") Stop Animation
@@ -20,8 +15,6 @@ block content
       p.randomtext To
       div#randomdata.destinationcity -
       div#randomdata.destinationcountry -
-      p.randomtext Data
-      div#randomdata.latency -
   div#map
   script(type='text/javascript', src='/javascripts/bundle.js')
   script(type='text/javascript', src='/javascripts/viewer.js')
