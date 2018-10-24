@@ -10,10 +10,10 @@ RUN apt-get install -y libzmq3-dev
 COPY package.json /usr/src/app/
 RUN npm install
 
+RUN npm install -g envify browserify
+
 # Bundle app source
 COPY . /usr/src/app
-
-RUN npm install -g envify browserify
 
 EXPOSE 3000 3001 6080
 
