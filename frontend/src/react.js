@@ -307,7 +307,7 @@ function addNewArc(data, callback){
 
   var pushColor = numberToColorHsl(color);
 
-  if ((parseInt(data['latency']) == 450 ){
+  if (parseInt(data['latency']) == 450 ){
     pushColor = [ 135, 206, 250, 255]
   }
 
