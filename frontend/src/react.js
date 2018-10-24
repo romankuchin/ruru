@@ -305,6 +305,12 @@ function addNewArc(data, callback){
     color = 100;
   }
 
+  var pushColor = numberToColorHsl(color);
+
+  if ((parseInt(data['latency']) == 450 ){
+    pushColor = [ 135, 206, 250, 255]
+  }
+
   arcs.push({
     sourcePosition: [
       data['source_long'],
@@ -327,7 +333,7 @@ function addNewArc(data, callback){
     destination_asn: data['destination_asn'],
     destination_proxy: data['destination_proxy_type'],
     latency: data['latency'],
-    color: numberToColorHsl(color),
+    color: pushColor,
   });
 
 }
