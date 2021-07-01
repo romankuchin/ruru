@@ -6,24 +6,24 @@ socket.on('counter', function(data){
 });
 
 // Map stats (at the bottom of the page)
-socket.on('mapstats', function(data){
-  data.forEach(function(stats, index){
-    source_html = "<tbody>"
-    stats.forEach(function(elem){
-      source_html += "<tr><td><img height='15px' src='/images/flags/"
-      source_html += elem[1]['countrycode'].toLowerCase()
-      source_html += "_64.png' /></td><td>"
-      source_html += elem[0]
-      source_html += "</td><td>"
-      source_html += Math.round(elem[1]['mean'])
-      source_html += " MB</td></tr>"
-    });
-    source_html += "</tbody>"
-    $('#top5_table'+ index)
-      .find('tbody')
-      .replaceWith(source_html);
-  });
-});
+// socket.on('mapstats', function(data){
+//   data.forEach(function(stats, index){
+//     source_html = "<tbody>"
+//     stats.forEach(function(elem){
+//       source_html += "<tr><td><img height='15px' src='/images/flags/"
+//       source_html += elem[1]['countrycode'].toLowerCase()
+//       source_html += "_64.png' /></td><td>"
+//       source_html += elem[0]
+//       source_html += "</td><td>"
+//       source_html += Math.round(elem[1]['mean'])
+//       source_html += " MB</td></tr>"
+//     });
+//     source_html += "</tbody>"
+//     $('#top5_table'+ index)
+//       .find('tbody')
+//       .replaceWith(source_html);
+//   });
+// });
 
 // Refresh random data
 socket.on('randomdata', function(data){

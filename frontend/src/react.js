@@ -8,11 +8,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider, connect} from 'react-redux';
-import autobind from 'autobind-decorator';
+
 
 import MapboxGLMap from 'react-map-gl';
 
-import * as request from 'd3-request';
+// import * as request from 'd3-request';
 import DeckGL from 'deck.gl/react';
 import {ArcLayer} from 'deck.gl';
 import ViewportAnimation from './map-utils';
@@ -149,23 +149,23 @@ class MapApp extends React.Component {
     window.removeEventListener('resize', this._handleResize);
   }
 
-  @autobind _handleResize() {
+  _handleResize = () => {
     this.setState({width: window.innerWidth, height: window.innerHeight});
   }
 
-  @autobind _onHover(info) {
+  _onHover = (info) => {
     console.log('hover', info);
     this.setState({hoveredItem: info});
   }
 
-  @autobind _handleViewportChanged(mapViewState) {
+  _handleViewportChanged = (mapViewState) => {
     if (mapViewState.pitch > 60) {
       mapViewState.pitch = 60;
     }
     this.props.dispatch(updateMap(mapViewState));
   }
 
-  @autobind _onWebGLInitialized(gl) {
+  _onWebGLInitialized = (gl) => {
     gl.enable(gl.DEPTH_TEST);
     gl.depthFunc(gl.LEQUAL);
   }
