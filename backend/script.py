@@ -8,7 +8,7 @@ IP2LocObj = IP2Location.IP2Location("IP2LOCATION-LITE-DB5.IPV6.BIN")
 
 context = zmq.Context()
 zmq_sock = context.socket(zmq.PUB)
-zmq_sock.connect("tcp://127.0.0.1:6080")
+zmq_sock.connect("tcp://172.17.0.1:6080")
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(("0.0.0.0", 5000))
