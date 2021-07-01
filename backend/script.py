@@ -33,29 +33,11 @@ def valid_ip(ip):
         return False
 
 
-dc_data = {
-    "ord": {
-        "lat": 41.748923,
-        "long": -88.0745617,
-        "city": "Chicago",
-        "country": "United States of America",
-        "country_code": "US",
-    },
-    "fra": {
-        "lat": 50.1494327,
-        "long": 8.7883346,
-        "city": "Frankfurt",
-        "country": "Germany",
-        "country_code": "DE",
-    },
-}
-
-while True:
-    data, src = receive(sock)
-    data = data.decode("utf-8").strip().replace('"', "")
+def process_ip(ip):
+    data = ip.strip().replace('"', "")
 
     if not valid_ip(data):
-        continue
+        return
 
     print("received from %s message: %s" % (src[0], data))
     if src[0].startswith("10.242"):
@@ -86,3 +68,28 @@ while True:
         "latency_total": 20,
     }
     zmq_sock.send_json(json_body)
+
+
+dc_data = {
+    "ord": {
+        "lat": 41.748923,
+        "long": -88.0745617,
+        "city": "Chicago",
+        "country": "United States of America",
+        "country_code": "US",
+    },
+    "fra": {
+        "lat": 50.1494327,
+        "long": 8.7883346,
+        "city": "Frankfurt",
+        "country": "Germany",
+        "country_code": "DE",
+    },
+}
+
+
+while True:
+    data, src = receive(sock)
+    data = data.decode("utf-8").split()
+    for ip in data:
+        process_ip(ip)
