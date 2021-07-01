@@ -9,7 +9,7 @@ RUN pip install -r requirements.txt
 
 COPY script.py .
 
-EXPOSE 5000
+EXPOSE 5000/udp
 COPY IP2LOCATION-LITE-DB5.IPV6.BIN .
 
 CMD [ "python", "script.py" ]
