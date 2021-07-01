@@ -39,13 +39,11 @@ def process_ip(ip):
     if not valid_ip(data):
         return
 
-    print("received from %s message: %s" % (src[0], data))
     if src[0].startswith("10.242"):
         dc = "fra"
     else:
         dc = "ord"
     rec = IP2LocObj.get_all(data)
-    print(rec.city)
     json_body = {
         "source_country": rec.country_long,
         "source_countrycode": rec.country_short,
