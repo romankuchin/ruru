@@ -10,8 +10,7 @@ context = zmq.Context()
 zmq_sock = context.socket(zmq.PUB)
 zmq_sock.connect("tcp://127.0.0.1:6080")
 
-sock = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM) # UDP
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(("0.0.0.0", 5000))
 
 
@@ -53,7 +52,7 @@ while True:
         dc = 'ord'
     rec = IP2LocObj.get_all(data)
     print(rec.city)
-    json_body={
+    json_body = {
         "source_country": rec.country_long,
         "source_countrycode": rec.country_short,
         "source_city": rec.city,
