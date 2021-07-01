@@ -15,5 +15,5 @@ RUN npm install -g envify browserify
 COPY . /usr/src/app
 
 EXPOSE 3000 6080
-CMD ["/bin/sh"]
-# CMD npm run build && npm start
+
+CMD npm run build && npm start
