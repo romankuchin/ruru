@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=production browserify src/react.js -o public/javascripts/bundle.js -t babelify  -t sassify -t glslify -t envify --debug",
+    "build": "NODE_ENV=production browserify src/react.js -o public/javascripts/bundle.js -t babelify  -t sassify -t glslify -t envify",
     "start": "node bin/www"
   },
   "dependencies": {
@@ -19,7 +19,6 @@
     "get-pixels": "^3.3.0",
     "gl-matrix": "^2.3.2",
     "glslify": "^7.1.1",
-    "influx": "^5.0.0-alpha.4",
     "lodash.flattendeep": "^3.0.2",
     "luma.gl": "^2.10.0",
     "morgan": "^1.10.0",

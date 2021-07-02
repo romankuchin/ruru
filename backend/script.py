@@ -8,7 +8,7 @@ IP2LocObj = IP2Location.IP2Location("IP2LOCATION-LITE-DB5.IPV6.BIN")
 
 context = zmq.Context()
 zmq_sock = context.socket(zmq.PUB)
-zmq_sock.connect("tcp://172.17.0.1:6080")
+zmq_sock.connect("tcp://127.0.0.1:6080")
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(("0.0.0.0", 5000))
@@ -18,11 +18,11 @@ def receive(socket):
     global BUFF_SIZE
     data = b""
     while True:
-        received, src = socket.recvfrom(BUFF_SIZE)
+        received = socket.recv(BUFF_SIZE)
         data += received
         if len(received) < BUFF_SIZE:
             break
-    return data, src
+    return data
 
 
 def valid_ip(ip):
@@ -33,16 +33,33 @@ def valid_ip(ip):
         return False
 
 
-def process_ip(ip):
-    data = ip.strip().replace('"', "")
+def process_ip(src, ip):
+    dc_data = {
+        "ord": {
+            "lat": 41.748923,
+            "long": -88.0745617,
+            "city": "Chicago",
+            "country": "United States of America",
+            "country_code": "US",
+        },
+        "fra": {
+            "lat": 50.1494327,
+            "long": 8.7883346,
+            "city": "Frankfurt",
+            "country": "Germany",
+            "country_code": "DE",
+        },
+    }
 
+    data = ip.strip().replace('"', "")
     if not valid_ip(data):
         return
 
-    if src[0].startswith("10.242"):
+    if src.startswith("10.242"):
         dc = "fra"
     else:
         dc = "ord"
+
     rec = IP2LocObj.get_all(data)
     json_body = {
         "source_country": rec.country_long,
@@ -68,26 +85,13 @@ def process_ip(ip):
     zmq_sock.send_json(json_body)
 
 
-dc_data = {
-    "ord": {
-        "lat": 41.748923,
-        "long": -88.0745617,
-        "city": "Chicago",
-        "country": "United States of America",
-        "country_code": "US",
-    },
-    "fra": {
-        "lat": 50.1494327,
-        "long": 8.7883346,
-        "city": "Frankfurt",
-        "country": "Germany",
-        "country_code": "DE",
-    },
-}
-
-
 while True:
-    data, src = receive(sock)
+    data = receive(sock)
     data = data.decode("utf-8").split()
+    if not data:
+        continue
+    src, data = data[0].strip().replace('"', ""), data[1:]
+    if not valid_ip(src):
+        continue
     for ip in data:
-        process_ip(ip)
+        process_ip(src, ip)
