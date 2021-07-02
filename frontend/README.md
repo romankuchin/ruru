@@ -7,12 +7,12 @@ This map is based on Mapbox and Web.GL. Most parts are written in React and comp
 
 In order to run the map, you will have to aquire an API key from Mapbox. It is free: http://mapbox.com. You will have to provide this key to the container that runs the UI. 
 
-## Build me (takes around 15 minutes)
+## Build (takes around 15 minutes)
 
-    sudo docker build -t frontend .
+    sudo docker build -t ruru-frontend .
 
-## Run me
+## Run
 
-Don't forget to set your token and the IP of your Influx container here.
+Don't forget to set your token.
 
-    sudo docker run -d -p 3001:3001 -p 3000:3000 -p 127.0.0.1:6080:6080 -e MAPBOX_TOKEN='token_here' -e INFLUX_HOST='ip_here' frontend
+    sudo docker run -d -p 3000:3000 -p 127.0.0.1:6080:6080 -e MAPBOX_TOKEN='token_here' ruru-frontend
